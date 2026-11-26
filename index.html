@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>75 Soft — Your Challenge</title>
+<style>
+:root{--ink:#1d2b24;--muted:#738078;--green:#26734b;--green-dark:#185638;--mint:#e7f2e9;--paper:#f5f7f3;--line:#e2e9e1;--white:#fff;--red:#b94343;--red-bg:#fae8e6;--gold:#b27b27}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input{font:inherit}.shell{max-width:1120px;margin:0 auto;padding:28px 24px 48px}
+header{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:25px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;background:var(--green);color:white;display:grid;place-items:center;font-weight:900;font-size:18px;letter-spacing:-1px}
+.brand h1{font-size:18px;letter-spacing:1.5px;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:12px}
+.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.saved{font-size:12px;color:var(--green);display:flex;align-items:center;gap:6px}.saved:before{content:"";width:7px;height:7px;background:#42a56a;border-radius:50%}
+.date-control{background:white;border:1px solid var(--line);border-radius:11px;padding:9px 11px;color:var(--ink)}
+.hero{background:linear-gradient(115deg,#1e563a,#2e7650);border-radius:24px;padding:28px 30px;color:white;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;box-shadow:0 10px 28px #244c3514}
+.eyebrow{font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:#c9e4d0;font-weight:800}.hero h2{font-size:clamp(26px,4vw,39px);line-height:1.08;letter-spacing:-1.2px;margin:10px 0}.hero p{color:#d8e9dc;margin:0;max-width:500px;font-size:14px;line-height:1.6}
+.hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.hero-stat{background:#ffffff16;border:1px solid #ffffff20;border-radius:15px;padding:15px}.hero-stat strong{display:block;font-size:27px;letter-spacing:-1px}.hero-stat span{font-size:11px;color:#d8e9dc}
+.progress-wrap{margin-top:20px}.progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#e1eee4;margin-bottom:8px}.progress-track{height:8px;background:#ffffff30;border-radius:20px;overflow:hidden}.progress-fill{height:100%;background:#c6edce;border-radius:20px;width:0;transition:width .25s}
+.grid-main{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin-top:18px}.card{background:var(--white);border:1px solid var(--line);border-radius:19px;padding:21px;box-shadow:0 4px 15px #263d2c08}.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}.card h3{font-size:16px;margin:0;letter-spacing:-.2px}.sub{font-size:12px;color:var(--muted);margin:5px 0 0}.day-badge{font-size:11px;font-weight:750;padding:6px 10px;border-radius:20px;background:#f0f3ef;color:#68746b;white-space:nowrap}.day-badge.complete{background:var(--mint);color:var(--green-dark)}.day-badge.missed{background:var(--red-bg);color:var(--red)}
+.checklist{display:grid;gap:9px}.task{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:13px;padding:13px 14px;transition:background .15s,border-color .15s}.task.done{background:#f4faf5;border-color:#cce4d1}.task input{width:19px;height:19px;accent-color:var(--green);cursor:pointer}.task label{flex:1;cursor:pointer;font-size:13px;font-weight:600}.task small{display:block;font-size:11px;font-weight:400;color:var(--muted);margin-top:3px}
+.task-icon{width:31px;height:31px;border-radius:10px;background:#f1f5f0;display:grid;place-items:center;font-size:15px}
+.day-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.btn{border:0;border-radius:10px;padding:10px 14px;font-size:12px;font-weight:750;cursor:pointer;background:var(--green);color:white}.btn:hover{background:var(--green-dark)}.btn.light{background:#edf2ed;color:#34443a}.btn.light:hover{background:#e2eae2}.btn:disabled{opacity:.4;cursor:not-allowed}
+.calendar-card{margin-top:18px}.legend{display:flex;gap:11px;flex-wrap:wrap;font-size:10px;color:var(--muted)}.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.weekday{text-align:center;font-size:10px;color:#8b968e;font-weight:700;padding-bottom:2px}.day{min-height:54px;border:1px solid var(--line);border-radius:11px;background:#f7f9f6;color:var(--ink);cursor:pointer;font-weight:750;font-size:13px;padding:6px 3px}.day small{display:block;font-size:9px;font-weight:500;margin-top:4px;color:var(--muted)}.day.complete{background:#e1f2e4;border-color:#b9dfc1;color:#1d673a}.day.complete small{color:#287748}.day.missed{background:var(--red-bg);border-color:#efc6c2;color:#a13a35}.day.missed small{color:#a13a35}.day.selected{outline:2px solid #3979b8;outline-offset:1px}
+.side-stack{display:grid;gap:18px;align-content:start}.week-list{display:grid;gap:13px}.week-row{display:grid;grid-template-columns:55px 1fr 38px;gap:9px;align-items:center}.week-label{font-size:11px;color:#66736a;font-weight:700}.week-bar{height:9px;background:#edf1ed;border-radius:10px;overflow:hidden}.week-bar span{height:100%;display:block;background:#5a9a6d;border-radius:10px}.week-count{text-align:right;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.milestones{display:grid;gap:10px}.milestone{display:flex;align-items:center;gap:11px;padding:10px;border:1px solid var(--line);border-radius:12px}.milestone-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:#f1f4f0;font-size:16px;filter:grayscale(1);opacity:.6}.milestone.unlocked{background:#f4faf5;border-color:#cce4d1}.milestone.unlocked .milestone-icon{background:#e1f2e4;filter:none;opacity:1}.milestone-copy{flex:1}.milestone-copy b{display:block;font-size:12px}.milestone-copy span{font-size:10px;color:var(--muted)}.milestone-tag{font-size:9px;color:var(--green);font-weight:800}
+.quote{background:#f2f6f1;border-radius:14px;padding:15px;color:#42604b;font-size:13px;line-height:1.5}.quote b{display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#758579;margin-bottom:5px}
+.footer-card{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.footer-card p{margin:5px 0 0;font-size:11px;color:var(--muted)}.footer-actions{display:flex;gap:8px;flex-wrap:wrap}.danger{background:#f8e9e7;color:#a13a35}.danger:hover{background:#f2d8d5}
+@media(max-width:780px){.grid-main{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.hero-stats{grid-template-columns:repeat(4,1fr)}.hero-stat{padding:11px}.hero-stat strong{font-size:22px}}
+@media(max-width:520px){.shell{padding:17px 12px 32px}header{align-items:flex-start}.header-right{justify-content:flex-end}.saved{display:none}.hero{padding:22px 19px;border-radius:19px}.hero-stats{grid-template-columns:repeat(2,1fr)}.card{padding:16px}.calendar{gap:5px}.day{min-height:47px;border-radius:9px;font-size:12px}.day small{font-size:8px}.weekday{font-size:9px}.footer-card{align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+ <div class="brand"><div class="logo">75</div><div><h1>75 SOFT</h1><p>Your consistency journey</p></div></div>
+ <div class="header-right"><span class="saved" id="saveStatus">Saved on this device</span><input class="date-control" id="startDate" type="date" aria-label="Challenge start date"></div>
+</header>
+<section class="hero">
+ <div>
+  <div class="eyebrow">Your 75-day reset</div>
+  <h2>Small steps.<br>Stronger habits.</h2>
+  <p id="heroMessage">Show up for yourself today. The progress takes care of itself.</p>
+  <div class="progress-wrap"><div class="progress-meta"><span>Overall challenge progress</span><b id="progressText">0 / 75 days</b></div><div class="progress-track"><div class="progress-fill" id="progressBar"></div></div></div>
+ </div>
+ <div class="hero-stats">
+  <div class="hero-stat"><strong id="completed">0</strong><span>Days completed</span></div>
+  <div class="hero-stat"><strong id="missed">0</strong><span>Days missed</span></div>
+  <div class="hero-stat"><strong id="percent">0%</strong><span>Completion rate</span></div>
+  <div class="hero-stat"><strong id="streak">0</strong><span>Current streak</span></div>
+ </div>
+</section>
+<div class="grid-main">
+ <section class="card">
+  <div class="card-head"><div><h3 id="dayTitle">Today's checklist</h3><p class="sub" id="dayDate">Day 1</p></div><span class="day-badge" id="dayStatus">In progress</span></div>
+  <div class="checklist" id="checklist"></div>
+  <div class="day-actions"><button class="btn" id="finishBtn">Record day as missed</button><button class="btn light" id="prevBtn">← Previous</button><button class="btn light" id="nextBtn">Next →</button></div>
+  <p class="sub" style="margin-top:13px">Your day turns green when all five habits are checked. If you finish a day without all five, record it as missed. You can still edit it later.</p>
+ </section>
+ <aside class="side-stack">
+  <section class="card"><div class="card-head"><div><h3>Weekly progress</h3><p class="sub">Completed days each week</p></div></div><div class="week-list" id="weekList"></div></section>
+  <section class="card"><div class="card-head"><div><h3>Milestones</h3><p class="sub">Celebrate every step forward</p></div></div><div class="milestones" id="milestones"></div></section>
+  <div class="quote"><b>A reminder</b><span id="quoteText">You don't have to be perfect. You just have to keep showing up.</span></div>
+ </aside>
+</div>
+<section class="card calendar-card">
+ <div class="card-head"><div><h3>Your 75-day calendar</h3><p class="sub" id="dateRange">Select any day to review your habits.</p></div><div class="legend"><span><i style="background:#5a9a6d"></i>Complete</span><span><i style="background:#d65b54"></i>Missed</span><span><i style="background:#cbd4cc"></i>Upcoming</span></div></div>
+ <div class="calendar" id="calendar"></div>
+</section>
+<section class="card footer-card">
+ <div><b style="font-size:13px">Your progress is saved automatically</b><p>Stored in this browser on this device. Export a backup if you want to move devices.</p><p id="storageNote"></p></div>
+ <div class="footer-actions"><button class="btn light" id="exportBtn">Export backup</button><button class="btn light" id="importBtn">Import backup</button><input type="file" id="importFile" accept="application/json" hidden><button class="btn danger" id="resetBtn">Reset challenge</button></div>
+</section>
+</div>
+<script>
+const KEY='75softChallenge_v1';
+const tasks=[
+ ['💧','Drink 3 liters of water','Stay hydrated throughout the day'],
+ ['🥗','Eat healthy','Follow your healthy eating plan'],
+ ['🏃','Exercise for 45 minutes','One day each week can be active recovery'],
+ ['📖','Read 10 pages','Make time for learning every day'],
+ ['📸','Take a progress picture','Capture your daily progress']
+];
+const quotes=[
+ 'You don’t have to be perfect. You just have to keep showing up.',
+ 'Discipline is choosing what you want most over what you want now.',
+ 'One good day becomes a good week. Keep going.',
+ 'Progress is built on the days you feel like giving up.',
+ 'Make today a day you are proud of.'
+];
+const milestones=[[1,'🌱','First step','You started. That matters.'],[7,'🔥','One week strong','Seven days of showing up.'],[14,'💪','Two weeks in','You are building real momentum.'],[21,'⭐','Three-week rhythm','Your habits are getting stronger.'],[30,'🏅','30-day milestone','You are well on your way.'],[45,'🚀','Past the halfway mark','Keep that momentum going.'],[60,'🏆','60 days strong','The finish line is getting closer.'],[75,'👑','Challenge complete','You followed through for 75 days.']];
+let selected=0;
+let state={startDate:new Date().toISOString().slice(0,10),days:Array.from({length:75},()=>({checks:[false,false,false,false,false],finished:false}))};
+const $=id=>document.getElementById(id);
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.days?.length===75&&s.startDate)state=s;}catch(e){}$('startDate').value=state.startDate;}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));$('saveStatus').textContent='Saved on this device';$('storageNote').textContent='Last saved: '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});}catch(e){$('saveStatus').textContent='Save unavailable — export a backup';}}
+function dateFor(i){const d=new Date(state.startDate+'T12:00:00');d.setDate(d.getDate()+i);return d;}
+function fmt(d,year=false){return d.toLocaleDateString(undefined,{month:'short',day:'numeric',...(year?{year:'numeric'}:{})});}
+function done(d){return d.checks.every(Boolean);}
+function dayStatus(d){return done(d)?'complete':d.finished?'missed':'pending';}
+function render(){
+ const end=dateFor(74),complete=state.days.filter(done).length,missed=state.days.filter(d=>d.finished&&!done(d)).length;
+ const today=new Date();today.setHours(12,0,0,0);const start=dateFor(0);let current=Math.floor((today-start)/86400000);current=Math.max(0,Math.min(74,current));
+ let streak=0;for(let i=current;i>=0&&done(state.days[i]);i--)streak++;
+ $('completed').textContent=complete;$('missed').textContent=missed;$('percent').textContent=Math.round(complete/75*100)+'%';$('streak').textContent=streak;
+ $('progressText').textContent=complete+' / 75 days';$('progressBar').style.width=(complete/75*100)+'%';
+ $('heroMessage').textContent=complete===75?'You did it. 75 days of commitment and consistency.':complete>=45?'You are in the home stretch. Keep showing up.':complete>=21?'Your consistency is adding up. Keep building.':'Show up for yourself today. The progress takes care of itself.';
+ $('dateRange').textContent=fmt(start,true)+' – '+fmt(end,true);
+ // Calendar with weekday headings and offset
+ const cal=$('calendar');cal.innerHTML='';['SUN','MON','TUE','WED','THU','FRI','SAT'].forEach(w=>{const el=document.createElement('div');el.className='weekday';el.textContent=w;cal.appendChild(el);});
+ for(let i=0;i<start.getDay();i++){const blank=document.createElement('div');cal.appendChild(blank);}
+ state.days.forEach((d,i)=>{const b=document.createElement('button');b.className='day '+dayStatus(d)+(i===selected?' selected':'');b.innerHTML=`${i+1}<small>${done(d)?'✓ DONE':d.finished?'MISSED':fmt(dateFor(i))}</small>`;b.setAttribute('aria-label',`Day ${i+1}, ${dayStatus(d)}`);b.onclick=()=>{selected=i;render();};cal.appendChild(b);});
+ // Selected day
+ const day=state.days[selected];$('dayTitle').textContent=selected===current?'Today's checklist':`Day ${selected+1} checklist`;$('dayDate').textContent=`Day ${selected+1} · ${fmt(dateFor(selected),true)}`;
+ const badge=$('dayStatus');badge.textContent=done(day)?'Completed':day.finished?'Missed':'In progress';badge.className='day-badge '+dayStatus(day);
+ $('checklist').innerHTML='';
+ tasks.forEach(([icon,title,desc],j)=>{const row=document.createElement('div');row.className='task'+(day.checks[j]?' done':'');const ico=document.createElement('div');ico.className='task-icon';ico.textContent=icon;const cb=document.createElement('input');cb.type='checkbox';cb.id='habit'+j;cb.checked=day.checks[j];cb.onchange=()=>{day.checks[j]=cb.checked;save();render();};const label=document.createElement('label');label.htmlFor=cb.id;label.innerHTML=`${title}<small>${desc}</small>`;row.append(ico,cb,label);$('checklist').appendChild(row);});
+ const finish=$('finishBtn');finish.disabled=day.finished||done(day);finish.textContent=done(day)?'✓ Day completed':day.finished?'Day recorded':'Record day as missed';
+ $('prevBtn').disabled=selected===0;$('nextBtn').disabled=selected===74;
+ // Weekly chart: 11 weeks, final week has 5 days
+ $('weekList').innerHTML='';
+ for(let w=0;w<11;w++){const from=w*7,to=Math.min(from+7,75),count=state.days.slice(from,to).filter(done).length,total=to-from;const row=document.createElement('div');row.className='week-row';row.innerHTML=`<span class="week-label">Week ${w+1}</span><div class="week-bar"><span style="width:${count/total*100}%"></span></div><span class="week-count">${count}/${total}</span>`;$('weekList').appendChild(row);}
+ // Milestones based on total completed days
+ $('milestones').innerHTML='';milestones.forEach(([n,icon,title,desc])=>{const el=document.createElement('div');el.className='milestone'+(complete>=n?' unlocked':'');el.innerHTML=`<div class="milestone-icon">${icon}</div><div class="milestone-copy"><b>${title}</b><span>${desc}</span></div><span class="milestone-tag">${complete>=n?'UNLOCKED':n+' DAYS'}</span>`;$('milestones').appendChild(el);});
+ $('quoteText').textContent=quotes[Math.min(4,Math.floor(complete/15))];
+}
+$('startDate').onchange=e=>{if(!e.target.value)return;state.startDate=e.target.value;save();render();};
+$('finishBtn').onclick=()=>{state.days[selected].finished=true;save();render();};
+$('prevBtn').onclick=()=>{selected=Math.max(0,selected-1);render();};
+$('nextBtn').onclick=()=>{selected=Math.min(74,selected+1);render();};
+$('resetBtn').onclick=()=>{if(confirm('Erase all challenge progress and start over?')){state.days=Array.from({length:75},()=>({checks:[false,false,false,false,false],finished:false}));selected=0;save();render();}};
+$('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='75-soft-backup.json';a.click();URL.revokeObjectURL(a.href);};
+$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const s=JSON.parse(await f.text());if(!s.startDate||!Array.isArray(s.days)||s.days.length!==75||!s.days.every(d=>Array.isArray(d.checks)&&d.checks.length===5))throw Error();state=s;selected=0;$('startDate').value=state.startDate;save();render();}catch(err){alert('That backup file is not valid.');}e.target.value='';};
+load();render();
+</script>
+</body>
+</html>
